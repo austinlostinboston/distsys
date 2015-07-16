@@ -24,6 +24,12 @@ git clone git@github.com:austinlostinboston/distsys.git
 ```
 cd distsys/config
 vim port.conf
+
+## port.conf is where you specify the port each local 
+## client runs on. This file is only used in local mode.
+## Lines starting with '#' will be ignored.
+15001
+15002
 ```
 By default, this file is setup to run two clients on port 15001 and 15002.
 Feel free to change this to desired port values above 8000.
@@ -51,3 +57,4 @@ python director.py shutdown_local
 This shutdowns the system processes running the as the clients.
 
 ### Directions (Distributed Mode)
+Will be added later.
