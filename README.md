@@ -9,15 +9,14 @@ Local mode is for testing the system and playing around with the syntax.
 It's really meant to help me understand workflows of the system before implementing equivalent functionalities for distributed mode.
 Currently, only local actions have been implemented.
 
+
+
 ### Installation
-```
-cd distsys
-python setup.py install
-```
-or
 ```
 git clone git@github.com:austinlostinboston/distsys.git
 ```
+
+
 
 ### Directions (Local Mode)
 #### Configure Ports
