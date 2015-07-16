@@ -17,7 +17,10 @@ git clone git@github.com:austinlostinboston/distsys.git
 #### Configure Ports
 ```
 cd distsys/config
+vim port.conf
 ```
+By default, this file is setup to run two clients on port 15001 and 15002.
+Feel free to change this to desired port values above 8000.
 
 #### Start up system
 ```
