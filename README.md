@@ -3,6 +3,12 @@ Distsys is a light weight, simple approach to setting up and interacting with a 
 This code was originally written to control data analysis jobs running across 10 HP Compaq 6500 running Ubuntu 12.04.5.
 In theory, this should work on any unix based system. Not tested for windows.
 
+
+The system has two modes, local and distributed.
+Local mode is for testing the system and playing around with the syntax.
+It's really meant to help me understand workflows of the system before implementing equivalent functionalities for distributed mode.
+Currently, only local actions have been implemented.
+
 ### Installation
 ```
 cd distsys
@@ -35,11 +41,13 @@ It is best to have a dedicated terminal for clients when running the system loca
 python director.py ping
 ```
 In a different terminal from the clients, run the above command.
-This sends a ping to each client service. Each client then sends an echo back to the director node server.
+This sends a ping to each client service.
+Each client then sends an echo back to the director node server.
 
 #### shutdown system
 ```
 python director.py shutdown_local
 ```
+This shutdowns the system processes running the as the clients.
 
 ### Directions (Distributed Mode)
