@@ -22,16 +22,20 @@ vim port.conf
 By default, this file is setup to run two clients on port 15001 and 15002.
 Feel free to change this to desired port values above 8000.
 
-#### Start up system
+#### Start up clients
 ```
 cd distsys
 python director.py start_local
 ```
+This will startup services on the ports specified in your port.conf file.
+It is best to have a dedicated terminal for clients when running the system locally.
 
 #### ping clients
 ```
 python director.py ping
 ```
+In a different terminal from the clients, run the above command.
+This sends a ping to each client service. Each client then sends an echo back to the director node server.
 
 #### shutdown system
 ```
