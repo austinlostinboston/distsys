@@ -8,7 +8,7 @@ def reader(msg, host, port):
     elif msg == "shutdown":
         rtn_msg = "Client " + address + " shutting down."
     elif msg[0:2] == "add":
-        
+        pass
     else:
         rtn_msg = "Command not understood by clients."
     return rtn_msg
