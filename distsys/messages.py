@@ -9,7 +9,7 @@ def reader(msg, host, port):
         rtn_msg = "Echo sent from " + address
     elif msg == "shutdown":
         rtn_msg = "Client " + address + " shutting down."
-    elif msg == "mem_stat"
+    elif msg == "mem_stat":
         rtn_msg = "Client " + address + "\n" \
         + "Service Memory Usage: " + str(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / (1024*1024.00)) + "MB" + "\n" \
         + "Child Process Memory Usage: " + str(resource.getrusage(resource.RUSAGE_CHILDREN).ru_maxrss / (1024*1024.00)) + "MB" + "\n"
