@@ -9,8 +9,9 @@ from multiprocessing import Pool
 from distsys.services import services
 from distsys.statistics import online
 
-s = services(localhost=True)
+s = services(localhost=False)
 num_clients = len(s.clients)
+#print s.clients
 
 def client_status(client):
     if online(client):
@@ -21,4 +22,4 @@ def client_status(client):
 if __name__ == "__main__":
     print "Determining online status of clients..."
     pool = Pool(processes=num_clients)
-    pool.map(client_status, s.client)
+    pool.map(client_status, s.clients)
