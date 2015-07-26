@@ -15,9 +15,9 @@ num_clients = len(s.clients)
 
 def client_status(client):
     if online(client):
-        print "Client: " + str(client) + "...\tON"
+        print "Client: " + str(client) + "\t" + "\033[92m" + "ON"
     else:
-        print "Client: " + str(client) + "...\tOFF"
+        print "Client: " + str(client) + "\t" + "\033[91m" + "OFF"
 
 if __name__ == "__main__":
     print "Determining online status of clients..."
