@@ -25,7 +25,7 @@ if __name__ == "__main__":
     print "Starting " + str(num_clients) + " local clients..."
     pool = Pool(processes=num_clients)
     pool.map(start_clients, local_service.clients)
-
+    #pool.apply_async(start_clients, local_service.clients, callback="finish")
 
 
 
