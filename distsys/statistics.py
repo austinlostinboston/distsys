@@ -62,4 +62,4 @@ def mkdir(ip_addr, path, directory):
     cd = 'cd ' + path +'; '
     mkdir = 'mkdir ' + directory
     os.system(ssh + "\'" + cd + mkdir + "\'")
-    print ip_addr + ": created \033[94m" + path + "/" + directory + "\033[0m"
+    print ip_addr + ":\tcreated \033[94m" + path + "/" + directory + "\033[0m"
