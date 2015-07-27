@@ -20,7 +20,7 @@ except:
     sys.exit()
 
 
-def create_dir(ip_addr, path, dir_name):
+def create_dir(ip_addr):
     try:
         #os.system('ssh -T ' + str(ip_addr) + ';\'ls\'')
         mkdir(ip_addr, path, dir_name)
