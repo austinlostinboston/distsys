@@ -57,4 +57,5 @@ def online(ip_addr, packets=2):
         return False
 
 def mkdir(ip_addr, path, directory):
-    mkdir = subprocess.call(["ssh", "-T", str(ip_addr), "\'", "cd", path, ";", "mkdir", directory,"\'"],stderr=subprocess.STDOUT)
+    #mkdir = subprocess.call(["ssh", "-T", str(ip_addr), "\'", "cd", path, ";", "mkdir", directory,"\'"],stderr=subprocess.STDOUT)
+    os.system('ssh -T ' + str(ip_addr) + '\'cd' + path +'; ' + directory + '\'')
