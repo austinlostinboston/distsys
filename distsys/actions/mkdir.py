@@ -7,6 +7,8 @@ import os
 
 ## Import distsys
 from distsys.services import services
+from distsys.statistics import mkdir
+
 ## Collect command line arguments
 try:
     dir_name = str(sys.argv[1])
@@ -16,19 +18,9 @@ except:
 
 
 def create_dir(ip_addr):
-    ## Get's current working directory and removes actions from the path
-    file_dir = os.path.dirname(os.path.abspath(__file__)).replace('actions','')
-
     try:
-        content = open(file_dir + 'config/config.ini','r')
-        lines = content.read().split("\n")
-        print lines
-        usr_pwd = [line.split(" ") for line in lines]
-        username = usr_pwd[0][1]
-        password = usr_pwd[1][1]
-
-        os.system('echo ' + password + ' | ssh ' + str(username) + '@' + str(ip_addr) + ';\'ls\'')
-
+        #os.system('ssh -T ' + str(ip_addr) + ';\'ls\'')
+        mkdir(ip_addr)
     except:
         print "Error reading config.ini file"
 
