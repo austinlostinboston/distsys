@@ -2,7 +2,6 @@
 
 ## Import builtins
 import sys
-from threading import Thread
 from multiprocessing import Pool 
 
 ## Import distsys
