@@ -15,9 +15,9 @@ def remote_control(action, arguments):
 
         if len(arguments) > 0:
             command.extend(arguments)
-
-        print command
+            
         call(command)
+
     except:
         error_msg = '[RUN_ERROR] Action could not be executed. Check spelling.'
         print error_msg
