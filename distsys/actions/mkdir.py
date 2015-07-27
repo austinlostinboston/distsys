@@ -11,16 +11,19 @@ from distsys.statistics import mkdir
 
 ## Collect command line arguments
 try:
-    dir_name = str(sys.argv[1])
+    path = str(sys.argv[1])
+    dir_name = str(sys.argv[2])
 except:
-    dir_name = 'poop'
-    print "You must enter a specific path for the new directory."
+    print "mkdir requires 2 arguments"
+    print "arg 1 - path for new directory"
+    print "arg 2 - name for new directory"
+    sys.exit()
 
 
-def create_dir(ip_addr):
+def create_dir(ip_addr, path, dir_name):
     try:
         #os.system('ssh -T ' + str(ip_addr) + ';\'ls\'')
-        mkdir(ip_addr)
+        mkdir(ip_addr, path, dir_name)
     except:
         print "Error reading config.ini file"
 
@@ -29,7 +32,7 @@ if __name__ == "__main__":
     s = services(localhost=False)
     num_clients = len(s.clients)
 
-    print "Creating directory on clients"
+    print "Creating directory on clients..."
     pool = Pool(processes=num_clients)
     pool.map(create_dir, s.clients)
-    print "finished...no errors."
+    print "finished..."
