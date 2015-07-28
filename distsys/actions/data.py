@@ -35,7 +35,10 @@ if __name__ == "__main__":
     num_clients = len(s.clients)
 
     client_files = distribute_data(num_clients, path)
+    combo = []
+    for i in range(s.clients):
+        combo.append([s.clients[i],client_files[i]])
 
     print "Distributing data..."
     pool = Pool(processes=num_clients)
-    pool.map(client_status, s.clients, client_files)
+    pool.map(client_status, combo)
