@@ -12,6 +12,9 @@ def mkdir(ip_addr, path, directory):
     os.system(ssh + "\'" + cd + mkdir + "\'")
     print "created \033[94m" + path + "/" + directory + "\033[0m" + " @" + ip_addr
 
+def remoteDirExists(ip_addr, path):
+    pass
+
 def distribute_data(num_clients, path):
     ## Gat all files in dir
     files = getAllFiles(path)
