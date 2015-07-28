@@ -14,7 +14,7 @@ try:
     path = str(sys.argv[1])
     dir_name = str(sys.argv[2])
 except:
-    print "mkdir requires 2 arguments"
+    print "data requires 2 arguments"
     print "arg 1 - path for new directory"
     print "arg 2 - name for new directory"
     sys.exit()
