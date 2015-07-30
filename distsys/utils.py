@@ -6,7 +6,7 @@ import re
 def emptyList(length):
     ## Creates a list of empty lists where each empty list independent of one another.
     main_list = range(length)
-    empty_list = [[] for _ in clients]
+    empty_list = [[] for _ in main_list]
 
     return empty_list
 
