@@ -31,7 +31,8 @@ def distribute_data(num_clients, path):
     print "Found " + str(len(files)) + "at " + path
 
     ## Split up files randomly among clients
-    client_files = splitFilesRandom(files, num_clients)
+    #client_files = splitFilesRandom(files, num_clients)
+    client_files = splitFilesMod(files, num_clients)
 
     return client_files
 
@@ -92,7 +93,7 @@ def splitFilesMod(files, num_clients):
         cf.append(f)
 
     return client_files
-    
+
 # files = getAllFiles(".")
 # print "Files: " + str(len(files))
 # cf = splitFiles(files, 20)
