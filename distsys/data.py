@@ -88,7 +88,9 @@ def splitFilesMod(files, num_clients):
     for f in files:
         file_name = f.split("/")[-1]
         num = extractNum(file_name)
-        mod_client = num % num_clients
+
+        ## Subtract 1 from the number before mod so file 1.txt goes to client 1 rather than client 2.
+        mod_client = (num - 1) % num_clients
         cf = client_files[mod_client]
         cf.append(f)
 
