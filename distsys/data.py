@@ -85,12 +85,13 @@ def splitFilesMod(files, num_clients):
             contains the path of the data file that will be distributed to that client. 
     '''
     client_files = emptyList(num_clients)
-    valid_ext = ['.txt','.json']
+    valid_ext = ['txt','json']
 
     for f in files:
         file_name = f.split("/")[-1]
         file_ext = f.split(".")[-1]
 
+        ## Only distribute data files
         if file_ext in valid_ext:
             num = extractNum(file_name)
 
