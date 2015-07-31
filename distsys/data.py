@@ -13,7 +13,7 @@ def mkdir(ip_addr, path, directory):
     cd = 'cd ' + path +'; '
     mkdir = 'mkdir ' + directory
     os.system(ssh + "\'" + cd + mkdir + "\'")
-    print "created \033[94m" + path + "/" + directory + "\033[0m" + " @" + ip_addr
+    print "created \033[94m" + path  + directory + "\033[0m" + " @" + ip_addr
 
 def remoteDirExists(ip_addr, path):
     pass
