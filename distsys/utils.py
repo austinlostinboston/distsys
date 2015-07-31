@@ -12,4 +12,4 @@ def emptyList(length):
 
 def extractNum(string):
     nums = re.findall(r'\_(\d+)\.', string)[-1]
-    return nums
+    return int(nums)
