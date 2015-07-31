@@ -7,7 +7,7 @@ import os
 
 ## Import distsys
 from distsys.services import services
-from distsys.data import mkdir, remote_file_exists, distribute_data, run_script
+from distsys.data import mkdir, remote_file_exists, distribute_data, run_script, collect_results
 
 ## Collect command line arguments
 try:
@@ -26,13 +26,13 @@ except:
 
 def run_job(combo):
     ip_addr = combo[0]
-    local_script_path = combo[1]
-    file_name = local_script_path[0].split("/")[-1]
+    local_script_path = combo[1][0]
+    file_name = local_script_path.split("/")[-1]
     project_name = combo[2]
 
     client_script_path = "~/distsys/bin/" + project_name + "/" + file_name
 
-    if remote_file_exists(client_script_path):
+    if remote_file_exists(ip_addr, client_script_path):
         pass
     else:
         os.system('scp ' + local_script_path + ' ' + ip_addr + ':' + client_script_path)

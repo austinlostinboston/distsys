@@ -1,8 +1,10 @@
 #!/usr/bin/python
+import os
+import socket
 
-data_dir = "~/distsys/data/sum_test"
-output_dir = "~/distsys/output/sum_test/"
-
+data_dir = os.path.expanduser("~/distsys/data/sum_test")
+output_dir = os.path.expanduser("~/distsys/output/sum_test")
+client_name = socket.gethostname()
 count = 0
 
 ## Extract data file paths
@@ -19,9 +21,10 @@ for f in files:
     lines = content.split("\n")
 
     for line in lines:
-        count += int(line)
+	if line != ' ' and len(line) > 0:
+        	count += int(line)
     r.close()
 
-w = open(output_dir + "output_1.txt")
-w.write(count)
+w = open(output_dir + "/output_" + client_name + ".txt", 'w')
+w.write(str(count))
 w.close()

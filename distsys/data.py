@@ -25,7 +25,7 @@ def remote_file_exists(ip_addr, path):
         return False
     
 def run_script(ip_addr, path):
-    subprocess.call(['ssh', ip_addr, 'python %s' % pipes.quote(path)])
+	os.system("ssh %s \'python %s\'" % (ip_addr, path))
 
 def distribute_data(num_clients, path, job=False):
     '''
