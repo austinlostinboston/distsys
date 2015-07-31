@@ -27,7 +27,7 @@ except:
 def run_job(combo):
     ip_addr = combo[0]
     local_script_path = combo[1]
-    file_name = script_path.split("/")[-1]
+    file_name = local_script_path.split("/")[-1]
     project_name = combo[2]
 
     client_script_path = "~/distsys/bin/" + project_name + "/" + file_name
@@ -47,7 +47,7 @@ if __name__ == "__main__":
     num_clients = len(s.clients)
 
     ## Distribute script only if it hasnt yet.    
-    client_files = distribute_data(num_clients, path, job=True)
+    client_files = distribute_data(num_clients, script_path, job=True)
 
     combo = []
     for i in range(num_clients):
