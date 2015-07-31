@@ -47,7 +47,7 @@ if __name__ == "__main__":
     num_clients = len(s.clients)
 
     ## Distribute script only if it hasnt yet.    
-    client_files = distribute_data(ip_addr, path, job=True)
+    client_files = distribute_data(num_clients, path, job=True)
 
     combo = []
     for i in range(num_clients):
