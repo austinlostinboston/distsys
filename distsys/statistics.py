@@ -55,11 +55,3 @@ def online(ip_addr, packets=2):
         return True
     else:
         return False
-
-def mkdir(ip_addr, path, directory):
-    #mkdir = subprocess.call(["ssh", "-T", str(ip_addr), "\'", "cd", path, ";", "mkdir", directory,"\'"],stderr=subprocess.STDOUT)
-    ssh = 'ssh -T ' + str(ip_addr) + ' '
-    cd = 'cd ' + path +'; '
-    mkdir = 'mkdir ' + directory
-    os.system(ssh + "\'" + cd + mkdir + "\'")
-    print "created \033[94m" + path + "/" + directory + "\033[0m" + " @" + ip_addr

@@ -7,7 +7,7 @@ import os
 
 ## Import distsys
 from distsys.services import services
-from distsys.statistics import mkdir
+from distsys.data import mkdir
 
 ## Collect command line arguments
 try:

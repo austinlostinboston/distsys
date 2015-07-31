@@ -1,6 +1,8 @@
 ## Import builtins
 import os
 import random
+import subprocess
+import pipes
 
 ## Import distsys
 from distsys.utils import emptyList, extractNum
@@ -15,10 +17,17 @@ def mkdir(ip_addr, path, directory):
     os.system(ssh + "\'" + cd + mkdir + "\'")
     print "created \033[94m" + path  + directory + "\033[0m" + " @" + ip_addr
 
-def remoteDirExists(ip_addr, path):
-    pass
+def remote_file_exists(ip_addr, path):
+    resp = subprocess.call(['ssh', ip_addr, 'test -e %s' % pipes.quote(path)])
+    if resp == 0:
+        return True
+    else:
+        return False
+    
+def run_script(ip_addr, path):
+    subprocess.call(['ssh', ip_addr, 'python %s' % pipes.quote(path)])
 
-def distribute_data(num_clients, path):
+def distribute_data(num_clients, path, job=False):
     '''
     Distributes all files found under 'path' and distributes them to the number of clients specified
         num_clients: The number of clients files will be distributed to.
@@ -27,15 +36,23 @@ def distribute_data(num_clients, path):
 
         returns: the output from file distributing method
     '''
-    ## Gat all files in dir
-    files = getAllFiles(path)
-    print "Found " + str(len(files)) + "at " + path
+    if job:
+        client_files = [[path]] * num_clients
+    else:
+        ## Gat all files in dir
+        files = getAllFiles(path)
+        print "Found " + str(len(files)) + "at " + path
 
-    ## Split up files randomly among clients
-    #client_files = splitFilesRandom(files, num_clients)
-    client_files = splitFilesMod(files, num_clients)
+        ## Split up files randomly among clients
+        #client_files = splitFilesRandom(files, num_clients)
+        client_files = splitFilesMod(files, num_clients)
 
     return client_files
+
+def collect_results(ip_addr, project_name):
+    remote_path = "~/distsys/output/" + project_name + "/*"
+    local_path = "~/austin/distsys/output/" + project_name
+    os.system('scp ' + ip_addr + ":" + remote_path + " " + local_path)
 
 def getAllFiles(path):
     '''
