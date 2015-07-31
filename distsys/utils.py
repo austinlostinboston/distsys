@@ -11,5 +11,5 @@ def emptyList(length):
     return empty_list
 
 def extractNum(string):
-    num = int(re.search(r'\d+', string).group())
-    return num
+    nums = re.findall(r'\_(\d+)\.', string)[-1]
+    return nums
