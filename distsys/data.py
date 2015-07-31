@@ -24,6 +24,7 @@ def distribute_data(num_clients, path):
         num_clients: The number of clients files will be distributed to.
         path: absolute path where data files can be found
 
+
         returns: the output from file distributing method
     '''
     ## Gat all files in dir
@@ -84,15 +85,19 @@ def splitFilesMod(files, num_clients):
             contains the path of the data file that will be distributed to that client. 
     '''
     client_files = emptyList(num_clients)
+    valid_ext = ['.txt','.json']
 
     for f in files:
         file_name = f.split("/")[-1]
-        num = extractNum(file_name)
+        file_ext = f.split(".")[-1]
 
-        ## Subtract 1 from the number before mod so file 1.txt goes to client 1 rather than client 2.
-        mod_client = (num - 1) % num_clients
-        cf = client_files[mod_client]
-        cf.append(f)
+        if file_ext in valid_ext:
+            num = extractNum(file_name)
+
+            ## Subtract 1 from the number before mod so file 1.txt goes to client 1 rather than client 2.
+            mod_client = (num - 1) % num_clients
+            cf = client_files[mod_client]
+            cf.append(f)
 
     return client_files
 
