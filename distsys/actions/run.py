@@ -55,4 +55,4 @@ if __name__ == "__main__":
 
     print "Distributing data..."
     pool = Pool(processes=num_clients)
-    pool.map(transfer_data, combo)
+    pool.map(run_job, combo)
