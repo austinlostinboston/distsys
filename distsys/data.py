@@ -102,7 +102,7 @@ def splitFilesMod(files, num_clients):
             contains the path of the data file that will be distributed to that client. 
     '''
     client_files = emptyList(num_clients)
-    valid_ext = ['txt','json']
+    valid_ext = ['txt','json','zip','gz']
 
     for f in files:
         file_name = f.split("/")[-1]
