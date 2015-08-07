@@ -14,9 +14,31 @@ Currently, only local actions have been implemented.
 ### Installation
 ```
 git clone git@github.com:austinlostinboston/distsys.git
+cd distsys
+pip install -r requirements.txt
+python setup.py develop
 ```
+develop should be used during development to avoid reinstalling the project after every change.
 
+### Directions (Distribute Mode)
 
+Below are directions outlining how to use the system and the different fuctionalities.
+Before you start, please make sure that you've enabled passwordless ssh between your server (master) and your clients. There's currently no need to enable this between clients.
+
+#### Configure Clients
+```
+cd distsys/config
+vim clients.conf
+
+## clients.conf is where you specify client IP Addresses.
+## This tells the server/master node where to start up
+## services and where to connect with them.
+## Lines starting with '#' will be ignored.
+192.168.1.1
+192.168.1.2
+...
+```
+Please enter the each client ip on a new line.
 
 ### Directions (Local Mode)
 #### Configure Ports
