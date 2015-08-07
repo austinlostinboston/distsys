@@ -42,10 +42,25 @@ vim clients.conf
 ```
 Please enter each client ip on a new line.
 
-#### Current list of distribute commands along with a breif description
+#### Current list of distributed mode commands.
+##### Note: All commands are interact with clients in an asyncronous fashion.
 - **status** - Determines the online status for each client.
-- **mkdir** - Asyncronously creates a directory on each client at a specific path
-- **data** - Asyncrously distributes .txt, .zip, and .gz files across the clients
+- **mkdir** - Creates a directory on each client at a specific path
+- **data** - Distributes .txt, .zip, and .gz files across the clients
+
+### Status
+```
+python director.py status
+
+output:
+Determining online status of clients...
+Client: 192.168.1.5     ON
+Client: 192.168.1.10    ON
+Client: 192.168.1.6     ON
+...
+```
+
+The status command sends a Linux 'ping to each client defined in clients.conf. Each ping sends two packets of data. If both packets are received by the client, the client is considered to b ONLINE. If any of the packets are lost, the client is considered OFFLINE.  
 
 ## Directions (Local Mode)
 ### Configure Ports
