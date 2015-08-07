@@ -43,9 +43,9 @@ vim clients.conf
 Please enter each client ip on a new line.
 
 #### Current list of distribute commands along with a breif description
-- **status**:
-- **mkdir**:
-- **data**:
+- **status** - Determines the online status for each client.
+- **mkdir** - Asyncronously creates a directory on each client at a specific path
+- **data** - Asyncrously distributes .txt, .zip, and .gz files across the clients
 
 ## Directions (Local Mode)
 ### Configure Ports
