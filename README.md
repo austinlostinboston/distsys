@@ -20,12 +20,14 @@ python setup.py develop
 ```
 develop should be used during development to avoid reinstalling the project after every change.
 
-### Directions (Distribute Mode)
+## Directions (Distributed Mode)
 
-Below are directions outlining how to use the system and the different fuctionalities.
+Currently, distsys does not run as service on both the server and clients.
+It utilizes a number of builtin functions of the Linux operating system like 
+Below are directions outlining how to use the system and it's different fuctionalities.
 Before you start, please make sure that you've enabled passwordless ssh between your server (master) and your clients. There's currently no need to enable this between clients.
 
-#### Configure Clients
+### Configure Clients
 ```
 cd distsys/config
 vim clients.conf
@@ -38,10 +40,15 @@ vim clients.conf
 192.168.1.2
 ...
 ```
-Please enter the each client ip on a new line.
+Please enter each client ip on a new line.
 
-### Directions (Local Mode)
-#### Configure Ports
+#### Current list of distribute commands along with a breif description
+- **status**:
+- **mkdir**:
+- **data**:
+
+## Directions (Local Mode)
+### Configure Ports
 ```
 cd distsys/config
 vim port.conf
@@ -55,7 +62,7 @@ vim port.conf
 By default, this file is setup to run two clients on port 15001 and 15002.
 Feel free to change this to desired port values above 8000.
 
-#### Start up clients
+### Start up clients
 ```
 cd distsys
 python director.py start_local
@@ -63,7 +70,7 @@ python director.py start_local
 This will startup services on the ports specified in your port.conf file.
 It is best to have a dedicated terminal for clients when running the system locally.
 
-#### ping clients
+### ping clients
 ```
 python director.py ping
 ```
@@ -71,11 +78,8 @@ In a different terminal from the clients, run the above command.
 This sends a ping to each client service.
 Each client then sends an echo back to the director node server.
 
-#### shutdown system
+### shutdown system
 ```
 python director.py shutdown_local
 ```
 This shutdowns the system processes running the as the clients.
-
-### Directions (Distributed Mode)
-Will be added later.
