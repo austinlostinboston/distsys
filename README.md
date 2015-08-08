@@ -47,12 +47,12 @@ Please enter each client ip on a new line.
 - **status** - Determines the online status for each client.
 - **mkdir** - Creates a directory on each client at a specific path
 - **data** - Distributes .txt, .zip, and .gz files across the clients
+- **run** - Distributes a specified script to each client, runs the script on each script, and returns to the output from each client to an output directory on the server.
 
-### Status
+### status
 ```
 python director.py status
 
-output:
 Determining online status of clients...
 Client: 192.168.1.5     ON
 Client: 192.168.1.10    ON
@@ -60,7 +60,21 @@ Client: 192.168.1.6     ON
 ...
 ```
 
-The status command sends a Linux 'ping to each client defined in clients.conf. Each ping sends two packets of data. If both packets are received by the client, the client is considered to b ONLINE. If any of the packets are lost, the client is considered OFFLINE.  
+The status command sends a Linux 'ping to each client defined in clients.conf. Each ping sends two packets of data. If both packets are received by the client, the client is considered to b ONLINE. If any of the packets are lost, the client is considered OFFLINE.
+
+### mkdir
+```
+python director.py mkdir path/to/dir/on/client dirName
+
+created path/to/dir/on/client/dirName @192.168.1.3
+created path/to/dir/on/client/dirName @192.168.1.4
+created path/to/dir/on/client/dirName @192.168.1.1
+...
+```
+
+The mkdir command uses Linux's 'mkdir' command to create directories across all clients. It is important that you have the same parent path for directory being created on each client or this command will fail. Again, this is implemented asyncronously.
+
+### data
 
 ## Directions (Local Mode)
 ### Configure Ports
