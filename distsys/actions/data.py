@@ -32,14 +32,17 @@ def transfer_data(combo):
 
     for f in files:
         ## Increment num files transferred
-        trans.value += 1
-        os.system('scp ' + f + ' ' + ip_addr + ':' + transfer_path)
+        transfer.value += 1
+        os.system('scp -q' + f + ' ' + ip_addr + ':' + transfer_path)
+
+        ## Print copy status
+        print "Transferred: " + str(transfer.value) + "/" + str(total.value)
 
 def setup(to, tr):
     global total
-    global trans
+    global transfer
     total = to
-    trans = tr
+    transfer = tr
 
 if __name__ == "__main__":
     ## Get client ips
@@ -57,5 +60,5 @@ if __name__ == "__main__":
         combo.append([s.clients[i],client_files[i]])
 
     print "Distributing data..."
-    pool = Pool(processes=num_clients, initializer=setup, initargs=[total_files, trans_files])
+    pool = Pool(processes=num_clients, initializer=setup, initargs=[total_files, transfer_files])
     pool.map(transfer_data, combo)
