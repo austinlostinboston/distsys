@@ -32,6 +32,7 @@ def distribute_data(num_clients, path, job=False):
     Distributes all files found under 'path' and distributes them to the number of clients specified
         num_clients: The number of clients files will be distributed to.
         path: absolute path where data files can be found
+        job: if the file is a script/job
 
 
         returns: the output from file distributing method
@@ -39,15 +40,16 @@ def distribute_data(num_clients, path, job=False):
     if job:
         client_files = [[path]] * num_clients
     else:
-        ## Gat all files in dir
+        ##Get all files in dir
         files = getAllFiles(path)
+        total_files = len(files)
         print "Found " + str(len(files)) + "at " + path
 
         ## Split up files randomly among clients
         #client_files = splitFilesRandom(files, num_clients)
         client_files = splitFilesMod(files, num_clients)
 
-    return client_files
+    return client_files, total_files
 
 def collect_results(ip_addr, project_name):
     remote_path = "~/distsys/output/" + project_name + "/*"

@@ -2,7 +2,7 @@
 
 ## Import builtins
 import sys
-from multiprocessing import Pool 
+from multiprocessing import Pool, Value
 import os
 
 ## Import distsys
@@ -31,18 +31,31 @@ def transfer_data(combo):
     transfer_path = '~/distsys/data/' + project
 
     for f in files:
+        ## Increment num files transferred
+        trans.value += 1
         os.system('scp ' + f + ' ' + ip_addr + ':' + transfer_path)
 
+def setup(to, tr):
+    global total
+    global trans
+    total = to
+    trans = tr
 
 if __name__ == "__main__":
+    ## Get client ips
     s = services(localhost=False)
     num_clients = len(s.clients)
 
-    client_files = distribute_data(num_clients, path)
+    client_files, total = distribute_data(num_clients, path)
+
+    ## Setup shared state variable
+    total_files = Value('i', total)
+    trans_files = Value('i', 0)
+
     combo = []
     for i in range(num_clients):
         combo.append([s.clients[i],client_files[i]])
 
     print "Distributing data..."
-    pool = Pool(processes=num_clients)
+    pool = Pool(processes=num_clients, initializer=setup, initargs=[total_files, trans_files])
     pool.map(transfer_data, combo)
