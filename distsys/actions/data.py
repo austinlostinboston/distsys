@@ -33,7 +33,7 @@ def transfer_data(combo):
     for f in files:
         ## Increment num files transferred
         transfer.value += 1
-        os.system('scp -q' + f + ' ' + ip_addr + ':' + transfer_path)
+        os.system('scp -q ' + f + ' ' + ip_addr + ':' + transfer_path)
 
         ## Print copy status
         print "Transferred: " + str(transfer.value) + "/" + str(total.value)

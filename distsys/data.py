@@ -3,6 +3,7 @@ import os
 import random
 import subprocess
 import pipes
+from distsys.config.settings import *
 
 ## Import distsys
 from distsys.utils import emptyList, extractNum
@@ -18,6 +19,17 @@ def mkdir(ip_addr, path, directory):
     print "created \033[94m" + path  + directory + "\033[0m" + " @" + ip_addr
 
 def remote_file_exists(ip_addr, path):
+    '''
+    Checks whether a file or dir exists on a specific client
+        ip_addr: the ip address in which you are checking for the file/dir
+        path: The path of the file or dir that is being checked
+    '''
+
+    ## Replace ~ (home symbol) with specific path
+    if '~' in path:
+        path = path.replace('~',__serverHomeDir__ + path)
+
+    
     resp = subprocess.call(['ssh', ip_addr, 'test -e %s' % pipes.quote(path)])
     if resp == 0:
         return True
