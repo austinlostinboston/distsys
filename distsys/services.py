@@ -61,7 +61,7 @@ class services(object):
             if self.localhost:
                 content = open(file_dir + '/config/port.conf','r')
             else:
-                content = open(file_dir + '/config/dist.conf','r')
+                content = open(file_dir + '/config/clients.conf','r')
 
             lines = content.read().split('\n')
             clients = []
