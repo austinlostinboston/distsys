@@ -43,7 +43,7 @@ def distribute_data(num_clients, path, job=False):
         ##Get all files in dir
         files = getAllFiles(path)
         total_files = len(files)
-        print "Found " + str(len(files)) + "at " + path
+        print "Found " + str(len(files)) + " files in " + path
 
         ## Split up files randomly among clients
         #client_files = splitFilesRandom(files, num_clients)

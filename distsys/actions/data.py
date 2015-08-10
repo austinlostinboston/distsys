@@ -53,7 +53,7 @@ if __name__ == "__main__":
 
     ## Setup shared state variable
     total_files = Value('i', total)
-    trans_files = Value('i', 0)
+    transfer_files = Value('i', 0)
 
     combo = []
     for i in range(num_clients):

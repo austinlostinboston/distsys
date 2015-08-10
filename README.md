@@ -75,6 +75,11 @@ created path/to/dir/on/client/dirName @192.168.1.1
 The mkdir command uses Linux's 'mkdir' command to create directories across all clients. It is important that you have the same parent path for directory being created on each client or this command will fail. Again, this is implemented asyncronously.
 
 ### data
+```
+python director.py data path/to/data projectName
+
+
+```
 
 ## Directions (Local Mode)
 ### Configure Ports
