@@ -35,9 +35,14 @@ def transfer_data(combo):
         transfer.value += 1
         
         ## Print copy status
-        print "Transferred: " + str(transfer.value) + "/" + str(total.value)
-
+        #print "Transferred: " + str(transfer.value) + "/" + str(total.value)
+	#sys.stdout.write("\rTransferred %d/%d files..." % (transfer.value, total.value))	
+	#sys.stdout.flush()
         os.system('scp -q ' + f + ' ' + ip_addr + ':' + transfer_path)
+        
+        sys.stdout.write("\rTransferred %d/%d files..." % (transfer.value, total.value))
+        sys.stdout.flush()
+    #print "\033[92m" + "transfer complete!" + "\033[0m"
 
 def setup(to, tr):
     global total
@@ -63,3 +68,4 @@ if __name__ == "__main__":
     print "Distributing data..."
     pool = Pool(processes=num_clients, initializer=setup, initargs=[total_files, transfer_files])
     pool.map(transfer_data, combo)
+    print "\033[92m" + "transfer complete!" + "\033[0m\n"
