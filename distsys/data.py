@@ -3,7 +3,7 @@ import os
 import random
 import subprocess
 import pipes
-from distsys.config.settings import *
+from distsys.config.settings import __serverHomeDir__ , __clientHomeDir__
 
 ## Import distsys
 from distsys.utils import emptyList, extractNum
@@ -15,10 +15,13 @@ def mkdir(ip_addr, path, directory):
     ssh = 'ssh -T ' + str(ip_addr) + ' '
     cd = 'cd ' + path +'; '
     mkdir = 'mkdir ' + directory
-    os.system(ssh + "\'" + cd + mkdir + "\'")
-    print "created \033[94m" + path  + directory + "\033[0m" + " @" + ip_addr
+    if remote_path_exists(ip_addr, path):
+        print "Directory " + directory + " already exists at " + ip_addr 
+    else:
+        os.system(ssh + "\'" + cd + mkdir + "\'")
+        print "created \033[94m" + path  + directory + "\033[0m" + " @" + ip_addr
 
-def remote_file_exists(ip_addr, path):
+def remote_path_exists(ip_addr, path):
     '''
     Checks whether a file or dir exists on a specific client
         ip_addr: the ip address in which you are checking for the file/dir
@@ -29,7 +32,7 @@ def remote_file_exists(ip_addr, path):
     if '~' in path:
         path = path.replace('~',__serverHomeDir__ + path)
 
-    
+
     resp = subprocess.call(['ssh', ip_addr, 'test -e %s' % pipes.quote(path)])
     if resp == 0:
         return True
