@@ -30,7 +30,7 @@ def remote_path_exists(ip_addr, path):
 
     ## Replace ~ (home symbol) with specific path
     if '~' in path:
-        path = path.replace('~',__serverHomeDir__ + path)
+        path = path.replace('~',__serverHomeDir__)
 
     print "checking path: " + path
 
