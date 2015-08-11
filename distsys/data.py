@@ -32,7 +32,9 @@ def remote_path_exists(ip_addr, path):
     if '~' in path:
         path = path.replace('~',__serverHomeDir__ + path)
 
+    print "checking path: " + path
 
+    ## Check path
     resp = subprocess.call(['ssh', ip_addr, 'test -e %s' % pipes.quote(path)])
     if resp == 0:
         return True
