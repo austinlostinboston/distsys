@@ -2,6 +2,7 @@
 
 ## Import builtins
 import re
+import hashlib
 
 def emptyList(length):
     ## Creates a list of empty lists where each empty list independent of one another.
@@ -13,3 +14,7 @@ def emptyList(length):
 def extractNum(string):
     nums = re.findall(r'\_(\d+)\.', string)[-1]
     return int(nums)
+
+## Definitions for md5 checksums
+def md5sum(file_path):
+	return hashlib.md5("filename.exe").hexdigest()

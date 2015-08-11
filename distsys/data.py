@@ -32,7 +32,7 @@ def remote_path_exists(ip_addr, path):
     if '~' in path:
         path = path.replace('~',__serverHomeDir__)
 
-    print "checking path: " + path
+    #print "checking path: " + path
 
     ## Check path
     resp = subprocess.call(['ssh', ip_addr, 'test -e %s' % pipes.quote(path)])
@@ -44,7 +44,7 @@ def remote_path_exists(ip_addr, path):
 def run_script(ip_addr, path):
 	os.system("ssh %s \'python %s\'" % (ip_addr, path))
 
-def distribute_data(num_clients, path, job=False):
+def distribute_data(num_clients, path, job=False, checksum=False):
     '''
     Distributes all files found under 'path' and distributes them to the number of clients specified
         num_clients: The number of clients files will be distributed to.
