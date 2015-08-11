@@ -16,7 +16,7 @@ def mkdir(ip_addr, path, directory):
     cd = 'cd ' + path +'; '
     mkdir = 'mkdir ' + directory
     if remote_path_exists(ip_addr, path + directory):
-        # print "Directory " + directory + " already exists at " + ip_addr 
+        # print "Directory " + directory + " already exists at " + ip_addr
     else:
         os.system(ssh + "\'" + cd + mkdir + "\'")
         print "created \033[94m" + path  + directory + "\033[0m" + " @" + ip_addr
