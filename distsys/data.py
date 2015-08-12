@@ -6,7 +6,7 @@ import pipes
 import json
 
 ## Import distsys
-from distsys.utils import emptyList, extractNum, md5sum
+from distsys.utils import emptyList, extractNum
 from distsys.config.settings import __serverHomeDir__ , __clientHomeDir__ , __serverDistsysHome__ , __clientDistsysHome__
 
 def mkdir(ip_addr, path, directory):
