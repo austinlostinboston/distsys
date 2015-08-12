@@ -48,9 +48,10 @@ def transfer_data(combo):
             failed.value += 1
         
         ## Run checksum on client and return value
-        sys.stdout.write("\rTransferred %d/%d files  %d failed checksum..." % (transfer.value, total.value, failed.value))
+        sys.stdout.write("\rTransferred %d/%d files | %d files failed checksum..." % (transfer.value, total.value, failed.value))
         sys.stdout.flush()
 
+## Setup function to set global variables for shared state
 def setup(to, tr, fail):
     global total
     global transfer
