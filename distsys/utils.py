@@ -14,3 +14,8 @@ def emptyList(length):
 def extractNum(string):
     nums = re.findall(r'\_(\d+)\.', string)[-1]
     return int(nums)
+
+## Extracts file name from full file path
+def getFileName(path):
+    fileName = path.split('/')[-1]
+    return fileName
