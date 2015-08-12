@@ -2,6 +2,7 @@
 
 ## Import builtins
 import re
+import hashlib
 
 def emptyList(length):
     ## Creates a list of empty lists where each empty list independent of one another.
