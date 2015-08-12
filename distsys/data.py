@@ -43,7 +43,7 @@ def remote_path_exists(ip_addr, path):
     else:
         return False
 
-def rm_local(path,):
+def rm_local(path):
     '''
     Removes local file at the specified path
         path: specific path to file

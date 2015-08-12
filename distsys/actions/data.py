@@ -8,7 +8,7 @@ import os
 ## Import distsys
 from distsys.services import services
 from distsys.statistics import online
-from distsys.data import distribute_data, mkdir, checksumClient, checksumServer
+from distsys.data import distribute_data, mkdir, checksumClient, checksumServer, rm_local
 from distsys.utils import getFileName
 
 ## Collect command line arguments
@@ -49,6 +49,9 @@ def transfer_data(combo):
         ## If file's checksums are different, add to the failed variable
         if svrChksum != cltChksum:
             failed.value += 1
+        else:
+            ## Remove file if it passed checksum
+            rm_local(f)
         
         ## Run checksum on client and return value
         sys.stdout.write("\rTransferred %d/%d files | %d files failed checksum..." % (transfer.value, total.value, failed.value))
