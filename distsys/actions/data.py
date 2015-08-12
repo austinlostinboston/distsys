@@ -9,6 +9,7 @@ import os
 from distsys.services import services
 from distsys.statistics import online
 from distsys.data import distribute_data, mkdir, checksumClient, checksumServer
+from distsys.utils import getFileName
 
 ## Collect command line arguments
 try:
@@ -31,6 +32,8 @@ def transfer_data(combo):
     transfer_path = '~/distsys/data/' + project
 
     for f in files:
+        fName = getFileName(f)
+
         ## Increment num files transferred
         transfer.value += 1
 
@@ -41,7 +44,7 @@ def transfer_data(combo):
         os.system('scp -q ' + f + ' ' + ip_addr + ':' + transfer_path)
 
         ## Get checksum of transferred file on client
-        cltChksum = checksumClient(ip_addr, f)
+        cltChksum = checksumClient(ip_addr, transfer_path + "/" + fName)
 
         ## If file's checksums are different, add to the failed variable
         if svrChksum != cltChksum:
