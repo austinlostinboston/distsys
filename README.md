@@ -78,8 +78,12 @@ The mkdir command uses Linux's 'mkdir' command to create directories across all 
 ```
 python director.py data path/to/data projectName
 
-
+Found 22280 files in ./tweets_distribute/
+Distributing data...
+Transferred 18597/22280 files | 0 files failed checksum...
 ```
+
+The data command takes a directory of files on the server, and distributes those files across all of the clients. There are two distributing methods implemented. One methed chooses a file's recipient randomly while the other method looks for a pattern in the file name, '_int' specifically, mods the int by the number of clients, and then sends the file to the corresponding client. The data command also has a checksum mechanism implemented as well. This mechanism performs an md5 checksum on each file before and after the file is tranferred to ensure content integrity. If the file passes this check, it is deleted from the data directory. If it doesn't pass, then the file will be left in the directory. This is also shown in the output as well.
 
 ## Directions (Local Mode)
 ### Configure Ports
