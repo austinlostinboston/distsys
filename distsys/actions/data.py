@@ -8,7 +8,7 @@ import os
 ## Import distsys
 from distsys.services import services
 from distsys.statistics import online
-from distsys.data import distribute_data, mkdir
+from distsys.data import distribute_data, mkdir, checksumClient, checksumServer
 
 ## Collect command line arguments
 try:
@@ -33,18 +33,31 @@ def transfer_data(combo):
     for f in files:
         ## Increment num files transferred
         transfer.value += 1
+
+        ## Get checksum of file from server
+        svrChksum = checksumServer(f)
         
         ## Print copy status
         os.system('scp -q ' + f + ' ' + ip_addr + ':' + transfer_path)
+
+        ## Get checksum of transferred file on client
+        cltChksum = checksumClient(ip_addr, f)
+
+        ## If file's checksums are different, add to the failed variable
+        if svrChksum != cltChksum:
+            failed.value += 1
         
-        sys.stdout.write("\rTransferred %d/%d files..." % (transfer.value, total.value))
+        ## Run checksum on client and return value
+        sys.stdout.write("\rTransferred %d/%d files  %d failed checksum..." % (transfer.value, total.value, failed.value))
         sys.stdout.flush()
 
-def setup(to, tr):
+def setup(to, tr, fail):
     global total
     global transfer
+    global failed
     total = to
     transfer = tr
+    failed = fail
 
 if __name__ == "__main__":
     ## Get client ips
@@ -56,12 +69,13 @@ if __name__ == "__main__":
     ## Setup shared state variable
     total_files = Value('i', total)
     transfer_files = Value('i', 0)
+    failed_files = Value('i', 0)
 
     combo = []
     for i in range(num_clients):
         combo.append([s.clients[i],client_files[i]])
 
     print "Distributing data..."
-    pool = Pool(processes=num_clients, initializer=setup, initargs=[total_files, transfer_files])
+    pool = Pool(processes=num_clients, initializer=setup, initargs=[total_files, transfer_files, failed_files])
     pool.map(transfer_data, combo)
     print "\033[92m" + "transfer complete!" + "\033[0m\n"

@@ -14,7 +14,3 @@ def emptyList(length):
 def extractNum(string):
     nums = re.findall(r'\_(\d+)\.', string)[-1]
     return int(nums)
-
-## Definitions for md5 checksums
-def md5sum(file_path):
-	return hashlib.md5("filename.exe").hexdigest()

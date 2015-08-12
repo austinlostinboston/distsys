@@ -3,10 +3,11 @@ import os
 import random
 import subprocess
 import pipes
-from distsys.config.settings import __serverHomeDir__ , __clientHomeDir__
+import json
 
 ## Import distsys
-from distsys.utils import emptyList, extractNum
+from distsys.utils import emptyList, extractNum, md5sum
+from distsys.config.settings import __serverHomeDir__ , __clientHomeDir__ , __serverDistsysHome__ , __clientDistsysHome__
 
 def mkdir(ip_addr, path, directory):
     '''
@@ -40,6 +41,14 @@ def remote_path_exists(ip_addr, path):
         return True
     else:
         return False
+
+def rm_local(path,):
+    '''
+    Removes local file at the specified path
+        path: specific path to file
+    '''
+    os.system('rm -rf %s' % (path))
+
     
 def run_script(ip_addr, path):
 	os.system("ssh %s \'python %s\'" % (ip_addr, path))
@@ -137,6 +146,16 @@ def splitFilesMod(files, num_clients):
             cf.append(f)
 
     return client_files
+
+def checksumClient(ip_addr, path):
+    resp = subprocess.check_output(['ssh', ip_addr, 'md5sum', path])
+    checksum = resp.split(' ')[0]
+    return checksum
+
+def checksumServer(path):
+    resp = subprocess.check_output(['md5sum', path])
+    checksum = resp.split(' ')[0]
+    return checksum
 
 # files = getAllFiles(".")
 # print "Files: " + str(len(files))
